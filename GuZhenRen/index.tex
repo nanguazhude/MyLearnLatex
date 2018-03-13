@@ -37,6 +37,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newenvironment{thisBody}
 	{
+		\zihao{3}
 	}%%begin
 	{
 		\clearpage
@@ -52,7 +53,7 @@
 \CTEXsetup[name={第,卷}]{chapter}
 \CTEXsetup[
 	name={第,章},%
-	number={\chinese{section}},%
+	number={ \chinese{section} },%
 	format={\raggedright\bfseries}
 ]{section}
 
@@ -60,6 +61,10 @@
 \chapter{鸡鸡大}
 \section{鸡鸡小}
 	\begin{thisBody} 
+		\textbf {sdalfjsadlkjflksadjflksadjflksadjfljl}
+
+		sdalfjsadlkjflksadjflksadjflksadjfljl
+
 		sfasfsafsafsdafdsafsd
 	\end{thisBody}
 \section{鸡鸡小}
@@ -81,7 +86,10 @@
 \section{鸡鸡小}
 	\begin{thisBody} 
 		fasfdsafsdaf 
+
+		fasfdsafsdaf 
 	\end{thisBody}
+
 
 \end{document}
 
