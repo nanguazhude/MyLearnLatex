@@ -1,26 +1,89 @@
-\documentclass[hyperref,UTF8]{ctexart}
+\documentclass[hyperref,UTF8]{ctexrep}
+
+\usepackage{xcolor}
 
 %设置页面
 \usepackage[a4paper,left=1cm,right=1cm,top=1cm,bottom=1.3cm]{geometry}
+
 %设置输出pdf格式
-\hypersetup{
-	colorlinks=true,
+\usepackage[
+	colorlinks=true ,
 	%bookmarks=true,
 	%bookmarksopen=false,
 	%pdfpagemode=FullScreen,
 	%pdfstartview=Fit,
-	pdftitle={测试},%标题
-	pdfauthor={初心者},%作者
-	pdfsubject={主题},%主题
-	pdfkeywords={今天;明天;后天}%关键字
-}
+	pdftitle={蛊真人} ,%标题
+	pdfauthor={蛊真人} ,%作者
+	pdfsubject={蛊真人} ,%主题
+	pdfkeywords={蛊真人} , %关键字
+	linkcolor=black 
+]{hyperref}  
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{cite}
+\usepackage{caption}
+%\usepackage{titlesec}
 
 %页码 页眉 页脚
 \pagestyle{plain}
 
+%常量
+\title{蛊真人}
+\author{蛊真人}
+%\data{\today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{thisBody}
+	{
+	}%%begin
+	{
+		\clearpage
+	}%%end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{document}
 
-Hellow Word!
+\maketitle%生成标题
+\tableofcontents%生成目录
+ 
+%\titleformat{\chapter}{\centering\Huge\bfseries}{第\,\thechapter\,卷}{1em}{}
+\CTEXsetup[name={第,卷}]{chapter}
+\CTEXsetup[
+	name={第,章},%
+	number={\chinese{section}},%
+	format={\raggedright\bfseries}
+]{section}
+
+%正文
+\chapter{鸡鸡大}
+\section{鸡鸡小}
+	\begin{thisBody} 
+		sfasfsafsafsdafdsafsd
+	\end{thisBody}
+\section{鸡鸡小}
+	\begin{thisBody} 
+		sfasfsafsafsdafdsafsd
+	\end{thisBody}
+\section{鸡鸡小}
+	\begin{thisBody} 
+		sfasfsafsafsdafdsafsd
+	\end{thisBody}
+\section{鸡鸡小}
+	\begin{thisBody} 
+		fasfdsafsdaf 
+	\end{thisBody}
+\section{鸡鸡小}
+	\begin{thisBody} 
+		sfasfsafsafsdafdsafsd
+	\end{thisBody}
+\section{鸡鸡小}
+	\begin{thisBody} 
+		fasfdsafsdaf 
+	\end{thisBody}
 
 \end{document}
+
+%
 
