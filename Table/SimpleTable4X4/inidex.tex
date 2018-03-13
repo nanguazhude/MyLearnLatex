@@ -1,0 +1,48 @@
+\documentclass[hyperref,UTF8]{ctexart}
+
+%设置页面
+\usepackage[a4paper,left=1cm,right=1cm,top=1cm,bottom=1.3cm]{geometry}
+%设置输出pdf格式
+\hypersetup{
+	colorlinks=true,
+	%bookmarks=true,
+	%bookmarksopen=false,
+	%pdfpagemode=FullScreen,
+	%pdfstartview=Fit,
+	pdftitle={测试},%标题
+	pdfauthor={初心者},%作者
+	pdfsubject={主题},%主题
+	pdfkeywords={今天;明天;后天}%关键字
+}
+
+%页码 页眉 页脚
+\pagestyle{plain}
+
+%表格相关
+\usepackage{array}
+
+\begin{document}
+
+\begin{table}
+\centering
+\begin{tabular}{|l|l|}
+\hline 
+	\parbox[c][3cm][t]{3cm} 
+	{“滚？”方源听了王二这话，顿时一声冷笑，挥掌朝前一切。}
+&
+	\parbox[c][3cm][c]{3cm} 
+	{$a^2+b^2=c^2$}
+\\ 
+\hline 
+	\parbox[c][3cm][b]{3cm} 
+	{$a^2+b^2=c^2$}
+&
+	\parbox[c][3cm][c]{3cm} 
+	{\centering{$a^2+b^2=c^2$}}
+\\
+\hline
+\end{tabular}
+\end{table}
+
+\end{document}
+
