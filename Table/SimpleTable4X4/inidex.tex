@@ -27,18 +27,29 @@
 \centering
 \begin{tabular}{|l|l|}
 \hline 
-	\parbox[c][3cm][t]{3cm} 
-	{“滚？”方源听了王二这话，顿时一声冷笑，挥掌朝前一切。}
+	\parbox[c][3cm][t]{3cm} %垂直：顶端
+	{ %\setlength \parskip{0pt plus 1pt} 
+		\rule{0pt}{12pt}%顶端边距
+		人是万物之灵，蛊是天地真精。
+
+		End
+	}
 &
-	\parbox[c][3cm][c]{3cm} 
-	{$a^2+b^2=c^2$}
+	\parbox[c][3cm][c]{3cm} {%垂直：居中
+		\raggedright%水平：左对齐
+		$a^2+b^2=c^2$
+	}
 \\ 
 \hline 
-	\parbox[c][3cm][b]{3cm} 
-	{$a^2+b^2=c^2$}
+	\parbox[c][3cm][b]{3cm} {%垂直：底端
+		\raggedleft%右对齐
+		$a^2+b^2=c^2$
+	}
 &
-	\parbox[c][3cm][c]{3cm} 
-	{\centering{$a^2+b^2=c^2$}}
+	\parbox[c][3cm][c]{3cm} {%垂直：居中
+		\centering%居中对齐
+		{$a^2+b^2=c^2$}
+	}
 \\
 \hline
 \end{tabular}
