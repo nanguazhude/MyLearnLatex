@@ -355,6 +355,16 @@ inline void Pack::creakTex() {
 
 	}//for
 
+	if (false==isFirst) {
+		varStream << u8R"(
+\end{center}
+
+}
+
+\newpage 
+)"_qu8;
+	}
+
 	varStream << u8R"!!(
 
 \end{document}
