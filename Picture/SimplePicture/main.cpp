@@ -5,10 +5,16 @@
 #include <iostream>
 #include <QtGui/QtGui>
 #include <optional>
+#include <fstream>
 using std::pmr::vector;
 
 inline QString operator""_qu8(const char * a,std::size_t b) {
 	return QString::fromUtf8(a, static_cast<int>(b));
+}
+
+inline std::ofstream & log() {
+	static std::ofstream varStream{"log.txt",std::ios::out};
+	return varStream;
 }
 
 class Pack {
@@ -43,6 +49,22 @@ int main(int argc, char *argv[]) {
 
 	varPack->makeFiles();
 	varPack->creakTex();
+	log().flush();
+}
+
+inline void rmTmpFile(const QString & argDirName) {
+	QDirIterator varIt(argDirName,
+		QStringList() << "*.tmp" <<"*.pdf" ,
+		QDir::NoFilter,
+		QDirIterator::Subdirectories);
+	vector<QString> varDirNameAboutToDelete;
+	while (varIt.hasNext()) {
+		varIt.next();
+		varDirNameAboutToDelete.push_back( varIt.fileInfo().absoluteFilePath());
+	}
+	for (const auto & varI:varDirNameAboutToDelete) {
+		QFile::remove(varI);
+	}
 }
 
 inline void Pack::creakTex() {
@@ -59,35 +81,47 @@ inline void Pack::creakTex() {
 			varDir = QDir{ varTmpDN };
 			break;
 		}
-		std::cout << "can not create dir tmp!" << std::endl;
+		log() << "can not create dir tmp!" << std::endl;
 		return;
 	} while (false);
 
+	rmTmpFile(varDir->absolutePath());
+
 	int varIndex = 0;
 	for (auto & varI : $Files) {
-		const QString varImageFileName = varI.$Info.absoluteFilePath();
-		QImage varImage{ varImageFileName };
-		if (varImage.isNull()) {
-			const auto varFileName8 = varImageFileName.toLocal8Bit();
-			std::cout
-				<< "Image File Read Error! "
-				<< varFileName8.data()
-				<< std::endl;
-			continue;
+		if (0 == varI.$Info.suffix().compare(QLatin1String("pdf", 3), Qt::CaseInsensitive)) {
+			const QString varImageFileName = varI.$Info.absoluteFilePath();
+			QImage varImage{ varImageFileName };
+			if (varImage.isNull()) {
+				const auto varFileName8 = varImageFileName.toLocal8Bit();
+				log()
+					<< "Image File Read Error! "
+					<< varFileName8.data()
+					<< std::endl;
+				continue;
+			}
+			varI.$Index = ++varIndex;
+			varI.$IndexName = QString("%1").arg(varI.$Index, 10, 10, QChar('0'))
+				+ QLatin1String(".tmp", 4);
+			if (varImage.save(varDir->filePath(varI.$IndexName), "png") == false) {
+				varI.$Index = -1;
+			}
 		}
-
-		varI.$Index = ++varIndex;
-		varI.$IndexName = QString("%1").arg(varI.$Index, 10, 10, QChar('0'))
-			+ QLatin1String(".tmp", 4);
-		if (varImage.save(varDir->filePath(varI.$IndexName), "png")==false) {
-			varI.$Index = -1 ;
-		}
+		else {
+			const QString varPdfFileName = varI.$Info.absoluteFilePath();
+			varI.$Index = ++varIndex;
+			varI.$IndexName = QString("%1").arg(varI.$Index, 10, 10, QChar('0'))
+				+ QLatin1String(".tmp", 4);
+			if (false == QFile::copy(varPdfFileName, varDir->filePath(varI.$IndexName))) {
+				varI.$Index = -1;
+			}
+		}			
 
 	}
 
 	QFile varFile{ varDir->absoluteFilePath("index.tex") };
 	if (varFile.open(QIODevice::WriteOnly)==false) {
-		std::cout << "create file fail!" << std::endl;
+		log() << "create file fail!" << std::endl;
 		return;
 	}
 	QTextStream varStream{&varFile};
@@ -189,8 +223,9 @@ inline void Pack::makeFiles() {
 		QDirIterator::Subdirectories);
 	$Files.clear();
 	while (varIt.hasNext()) {
-		varIt.next();
+		const auto varL8 = varIt.next().toLocal8Bit();
 		$Files.emplace_back(varIt.fileInfo());
+		log() << "find a name : " << varL8.data() << std::endl;
 	}
 }
 
