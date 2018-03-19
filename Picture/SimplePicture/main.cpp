@@ -89,7 +89,7 @@ inline void Pack::creakTex() {
 
 	int varIndex = 0;
 	for (auto & varI : $Files) {
-		if (0 == varI.$Info.suffix().compare(QLatin1String("pdf", 3), Qt::CaseInsensitive)) {
+		if (0 != varI.$Info.suffix().compare(QLatin1String("pdf", 3), Qt::CaseInsensitive)) {
 			const QString varImageFileName = varI.$Info.absoluteFilePath();
 			QImage varImage{ varImageFileName };
 			if (varImage.isNull()) {
