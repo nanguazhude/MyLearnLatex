@@ -5,7 +5,7 @@
 \input{setup_hyperref}        %设置超链接，控制pdf元数据
 \input{setup_page_title}      %设置封面常量
 \input{setup_page_style}      %设置页眉页脚，页边注
-\input{setup_body_style}  %设置段落格式
+\input{setup_body_style}      %设置段落格式
 
 \begin{document}
 
@@ -16,9 +16,10 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \mainmatter
-\input{setup_chapter_style}
-\input{setup_section_style}
-
+\input{setup_chapter_style} %设置chapter样式
+\input{setup_section_style} %设置section样式
+\input{set_commands}        %引入自定义命令
+%%%add chapters
 \input{chapter_01/index.tex}
 
 

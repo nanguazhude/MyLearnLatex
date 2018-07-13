@@ -1,0 +1,27 @@
+ 
+\newcommand\currentchaptername{}%定义当前chapter名字
+\newcommand\currentsectionname{}%定义当前section名字
+
+\newcounter{vcurrentcountersection}                                 %用于获得当前section的编号
+\setcounter{vcurrentcountersection}{0}                              %用于获得当前section的编号
+\newcommand\currentcountersection{ \arabic{vcurrentcountersection} }%用于获得当前section的编号
+
+\newcommand\newchapter[1]{                        %定义一个新的chapter
+    \rhead{}                                      %删除右上页眉
+    \renewcommand\currentchaptername{#1}          %设置当前chapter名称
+    \chapter{ \currentchaptername }               %定义新的chapter
+    \rhead{
+        第\,\zhnumber{ \thechapter }\,卷
+        \,\;\currentchaptername\,\;
+        第\,\zhnumber{\currentcountersection}\,章
+        \,\;\currentsectionname 
+    }                                             %定义右上页眉
+}
+
+\newcommand\newsection[1]{               %定义一个新的section
+    \cleardoublepage                     %增加页面空白
+    \renewcommand\currentsectionname{#1} %定义当前section名字
+    \stepcounter{vcurrentcountersection} %设置当前section计数，应当与section自动计数一致
+    \section{ \currentsectionname }      %创建section
+}
+ 
