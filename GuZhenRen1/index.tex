@@ -1,0 +1,32 @@
+%使用xelatex
+\documentclass[hyperref,oneside,UTF8]{ctexbook}
+
+\input{setup_page_geometry_a4}%设置纸张大小，页边距
+\input{setup_hyperref}        %设置超链接，控制pdf元数据
+\input{setup_page_title}      %设置封面常量
+\input{setup_page_style}      %设置页眉页脚，页边注
+\input{setup_body_style}  %设置段落格式
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frontmatter
+\input{make_title}          %生成封面
+\input{make_tableofcontents}%生成目录
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+\input{setup_chapter_style}
+\input{setup_section_style}
+
+\input{chapter_01/index.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\backmatter
+
+\end{document}
+
+
+
+
