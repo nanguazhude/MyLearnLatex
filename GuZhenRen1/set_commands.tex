@@ -7,6 +7,8 @@
 \newcommand\currentcountersection{ \arabic{vcurrentcountersection} }%用于获得当前section的编号
 
 \newcommand\newchapter[1]{                        %定义一个新的chapter
+    \setcounter{vcurrentcountersection}{0}        %将section编号重置为0
+    \setcounter{section}{0}                       %将section编号重置为0
     \rhead{}                                      %删除右上页眉
     \renewcommand\currentchaptername{#1}          %设置当前chapter名称
     \chapter{ \currentchaptername }               %定义新的chapter
