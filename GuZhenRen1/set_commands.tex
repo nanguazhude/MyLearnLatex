@@ -21,7 +21,7 @@
 }
 
 \newcommand\newsection[1]{               %定义一个新的section
-    \cleardoublepage                     %增加页面空白
+ %   \cleardoublepage                     %增加页面空白
     \renewcommand\currentsectionname{#1} %定义当前section名字
     \stepcounter{vcurrentcountersection} %设置当前section计数，应当与section自动计数一致
     \section{ \currentsectionname }      %创建section
