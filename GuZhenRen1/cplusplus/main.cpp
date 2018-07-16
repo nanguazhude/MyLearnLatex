@@ -9,9 +9,10 @@
 #include <iostream>
 #include <filesystem>
 #include <string_view>
+#include <optional>
 
 /*仅支持ASCII码*/
-inline const  QDir & $g$ProjectCurrentPath() { 
+inline const  QDir & $g$ProjectCurrentPath() {
 	static const auto $m$Ans = QDir{ PRO_CURRENT_PATH };
 	return $m$Ans;
 }
@@ -229,7 +230,7 @@ inline void remove_ad(std::vector< DetailChapter > & arg) {
 			}
 		}
 	}
-	
+
 }
 
 /*根据guzhenren.txt生成tex文件*/
@@ -241,7 +242,7 @@ inline void update() {
 		{
 			std::vector<std::string> lines;
 			{
-				QFile varFile{ $g$ProjectCurrentPath().absoluteFilePath( QStringLiteral( "../guzhenren.txt") )  };
+				QFile varFile{ $g$ProjectCurrentPath().absoluteFilePath(QStringLiteral("../guzhenren.txt")) };
 				varFile.open(QIODevice::ReadOnly);
 				QTextStream varStream{ &varFile };
 				while (varStream.atEnd() == false) {
@@ -259,6 +260,17 @@ inline void update() {
 
 	std::uint32_t n_chapter = 0;
 	std::uint32_t n_section = 0;
+	std::optional< std::filesystem::path > log_file_path;
+	const QString varDirRoot = $g$ProjectCurrentPath().absoluteFilePath("../");
+	{
+		QDir varDir{ varDirRoot };
+		log_file_path = std::filesystem::u8path(
+			varDir.absoluteFilePath(QStringLiteral("log.txt"))
+			.toUtf8()
+			.toStdString());
+	}
+
+	std::ofstream log_file{ *log_file_path,std::ios::binary };
 
 	for (const auto & varC : detail_chapters) {
 		n_section = 0;
@@ -266,8 +278,7 @@ inline void update() {
 		QString dir_path;
 		const QString varChapterName_ = QString("chapter_%1").arg(n_chapter, 2, 10, QChar('0'));
 		{
-			dir_path = $g$ProjectCurrentPath().absoluteFilePath("../") ;
-			QDir varDir{ dir_path };
+			QDir varDir{ varDirRoot };
 			dir_path = varDir.absoluteFilePath(varChapterName_);
 			varDir.mkpath(dir_path);
 		}
@@ -286,12 +297,13 @@ inline void update() {
 			<< varC.par_chapter_name
 			<< std::endl
 			<< std::endl;
+
 		const auto varChapterName = varChapterName_.toUtf8().toStdString();
 		for (const auto & varS : varC.par_sections) {
 			const QString sectionName__ = QString("%1").arg(++n_section, 3, 10, QChar('0')) + QStringLiteral(".tex");
 			const QString sectionPath = varDir.absoluteFilePath(sectionName__);
 			const auto setctionName = sectionName__.toUtf8().toStdString();
-			std::filesystem::path sectionPathFile = std::filesystem::u8path(sectionPath.toUtf8().toStdString());
+			const std::filesystem::path sectionPathFile = std::filesystem::u8path(sectionPath.toUtf8().toStdString());
 			std::ofstream ofs_sectoin{
 				sectionPathFile,std::ios::binary
 			};
@@ -318,8 +330,35 @@ inline void update() {
 				<< std::endl
 				<< std::endl;
 			ofs_sectoin << u8R"(\begin{this_body})"sv << std::endl << std::endl;
+			std::uint32_t varLineCout = 0;
+			/*写每一行*/
 			for (const auto & varP : varS.par_data) {
-				ofs_sectoin << replace_all(varP) << std::endl << std::endl;
+				ofs_sectoin
+					<< u8R"(%)"sv
+					<< ++varLineCout
+					<< std::endl
+					<< replace_all(varP)
+					<< std::endl
+					<< std::endl;
+				/************************************************/
+				//如果改行有可能的广告字符，则将改行输出到log文件
+				const static std::regex varRegex{ u8R"([*a-zA-Z.])" };
+				if (std::regex_search(varP, varRegex)) {
+					log_file
+						<< varC.par_chapter_name
+						<< u8R"(;)"sv
+						<< std::endl
+						<< varS.par_section_name
+						<< u8R"(;)"sv
+						<< std::endl
+						<< varLineCout
+						<< u8R"(;)"sv
+						<< std::endl
+						<< varP
+						<< std::endl
+						<< std::endl;
+				}
+				/************************************************/
 			}
 			ofs_sectoin << u8R"(\end{this_body})"sv << std::endl << std::endl;
 		}
@@ -334,7 +373,6 @@ int main(int argc, char *argv[]) {
 	QGuiApplication app(argc, argv);
 
 	update();
-
 
 	return 0;
 }
