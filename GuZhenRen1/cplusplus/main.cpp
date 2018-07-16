@@ -33,16 +33,16 @@ inline std::string replace_all(const std::string_view arg) {
 	//regex : ^ $ \ . * + ? ( ) [ ] { } |
 	const static std::vector< ReplaceItem > varReplaceDutys = []() {
 		std::vector< ReplaceItem > ans;
-		ans.emplace_back(std::regex(u8R"(~)"), std::string(u8R"(\~{})"sv));
-		ans.emplace_back(std::regex(u8R"(#)"), std::string(u8R"(\#)"sv));
-		ans.emplace_back(std::regex(u8R"(\$)"), std::string(u8R"(\$)"sv));
-		ans.emplace_back(std::regex(u8R"(%)"), std::string(u8R"(\%)"sv));
-		ans.emplace_back(std::regex(u8R"(\^)"), std::string(u8R"(\^{})"sv));
-		ans.emplace_back(std::regex(u8R"(&)"), std::string(u8R"(\&)"sv));
-		ans.emplace_back(std::regex(u8R"(\{)"), std::string(u8R"(\{)"sv));
-		ans.emplace_back(std::regex(u8R"(\})"), std::string(u8R"(\})"sv));
-		ans.emplace_back(std::regex(u8R"(_)"), std::string(u8R"(\_)"sv));
-		ans.emplace_back(std::regex(u8R"(\\)"), std::string(u8R"(\\)"sv));
+		ans.emplace_back(std::regex(u8R"(~)", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\~{})"sv));
+		ans.emplace_back(std::regex(u8R"(#)", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\#)"sv));
+		ans.emplace_back(std::regex(u8R"(\$)", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\$)"sv));
+		ans.emplace_back(std::regex(u8R"(%)", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\%)"sv));
+		ans.emplace_back(std::regex(u8R"(\^)", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\^{})"sv));
+		ans.emplace_back(std::regex(u8R"(&)", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\&)"sv));
+		ans.emplace_back(std::regex(u8R"(\{)", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\{)"sv));
+		ans.emplace_back(std::regex(u8R"(\})", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\})"sv));
+		ans.emplace_back(std::regex(u8R"(_)", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\_)"sv));
+		ans.emplace_back(std::regex(u8R"(\\)", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\\)"sv));
 		return std::move(ans);
 	}();
 
@@ -109,7 +109,8 @@ inline std::string replace_all(const std::string_view arg) {
 /*获得章名，去掉 第……卷 */
 inline std::string get_chapter_name(const std::string & arg) {
 	if (arg.empty()) { return {}; }
-	const static std::regex varR{ u8R"(^第(一|二|三|四|五|六|七|八|九|十|零|百|千|万)+?卷(( |:|：)+)(.*))" };
+	const static std::regex varR{ u8R"(^第(一|二|三|四|五|六|七|八|九|十|零|百|千|万)+?卷(( |:|：)+)(.*))" 
+		, std::regex_constants::ECMAScript | std::regex_constants::optimize };
 	std::smatch varAns;
 	if (std::regex_match(arg, varAns, varR)) {
 		if (varAns.length() < 5) { return{}; }
@@ -121,7 +122,8 @@ inline std::string get_chapter_name(const std::string & arg) {
 /*获得节名，去掉 第……节 */
 inline std::string get_section_name(const std::string & arg) {
 	if (arg.empty()) { return {}; }
-	const static std::regex varR{ u8R"(^第(一|二|三|四|五|六|七|八|九|十|零|百|千|万)+?节(( |:|：)+)(.*))" };
+	const static std::regex varR{ u8R"(^第(一|二|三|四|五|六|七|八|九|十|零|百|千|万)+?节(( |:|：)+)(.*))" 
+		, std::regex_constants::ECMAScript | std::regex_constants::optimize };
 	std::smatch varAns;
 	if (std::regex_match(arg, varAns, varR)) {
 		if (varAns.length() < 5) { return{}; }
@@ -151,7 +153,8 @@ public:
 inline std::vector< DetailChapter > split_sectoin(std::vector<Chapter> & arg) {
 	std::vector< DetailChapter > varAns;
 	varAns.reserve(arg.size());
-	const static std::regex varR{ u8R"(^第(一|二|三|四|五|六|七|八|九|十|零|百|千|万)+?节( |:|：).*)" };
+	const static std::regex varR{ u8R"(^第(一|二|三|四|五|六|七|八|九|十|零|百|千|万)+?节( |:|：).*)"
+		, std::regex_constants::ECMAScript | std::regex_constants::optimize };
 	for (auto & varI : arg) {
 		DetailChapter & varC = varAns.emplace_back();
 		varC.par_chapter_name = std::move(varI.par_chapter_name);
@@ -184,7 +187,8 @@ inline std::vector< DetailChapter > split_sectoin(std::vector<Chapter> & arg) {
 /*分章*/
 inline std::vector< Chapter > split_chapter(std::vector<std::string> & arg) {
 	std::vector< Chapter > varAns;
-	const static std::regex varR{ u8R"(^第(一|二|三|四|五|六|七|八|九|十|零|百|千|万)+?卷( |:|：).*)" };
+	const static std::regex varR{ u8R"(^第(一|二|三|四|五|六|七|八|九|十|零|百|千|万)+?卷( |:|：).*)" 
+		, std::regex_constants::ECMAScript | std::regex_constants::optimize };
 	//goto_next:
 	{
 		Chapter varChapter;
@@ -213,7 +217,8 @@ inline std::vector< Chapter > split_chapter(std::vector<std::string> & arg) {
 
 /*去掉原文带的广告*/
 inline void remove_ad(std::vector< DetailChapter > & arg) {
-	const static std::regex varR{ u8R"(-*)" };
+	const static std::regex varR{ u8R"(-*)"
+		, std::regex_constants::ECMAScript | std::regex_constants::optimize };
 
 	/*移除文档末尾的 ------------ */
 	for (auto & varC : arg) {
@@ -342,8 +347,12 @@ inline void update() {
 					<< std::endl;
 				/************************************************/
 				//如果改行有可能的广告字符，则将改行输出到log文件
-				const static std::regex varRegex{ u8R"([*a-zA-Z.])" };
-				const static std::regex varIgnoreRegex{ u8R"(^(ps|（|\()[\s\S]+$)",std::regex_constants::icase };
+				const static std::regex varRegex{ u8R"([*a-zA-Z.])" ,
+					std::regex_constants::ECMAScript | std::regex_constants::optimize };
+				const static std::regex varIgnoreRegex{ u8R"(^(ps|（|\()[\s\S]+$)",
+					std::regex_constants::ECMAScript |
+					std::regex_constants::optimize |
+					std::regex_constants::icase };
 				if (std::regex_search(varP, varRegex)) {
 					if (!std::regex_match(varP, varIgnoreRegex)) {
 						log_file
