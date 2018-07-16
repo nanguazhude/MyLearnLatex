@@ -67,7 +67,7 @@ inline std::string replace_all(const std::string & arg) {
 			}
 
 			if (varD.data.empty()) { /*skip the empty data  */
-				tmpReplaces.push_back(varD);
+				//tmpReplaces.push_back(varD);
 				continue;
 			}
 
