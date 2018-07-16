@@ -343,20 +343,23 @@ inline void update() {
 				/************************************************/
 				//如果改行有可能的广告字符，则将改行输出到log文件
 				const static std::regex varRegex{ u8R"([*a-zA-Z.])" };
+				const static std::regex varIgnoreRegex{u8R"(^(ps|（|\()[\s\S]+$)"};
 				if (std::regex_search(varP, varRegex)) {
-					log_file
-						<< varC.par_chapter_name
-						<< u8R"(;)"sv
-						<< std::endl
-						<< varS.par_section_name
-						<< u8R"(;)"sv
-						<< std::endl
-						<< varLineCout
-						<< u8R"(;)"sv
-						<< std::endl
-						<< varP
-						<< std::endl
-						<< std::endl;
+					if (!std::regex_match(varP,varIgnoreRegex)) {
+						log_file
+							<< varC.par_chapter_name
+							<< u8R"(;)"sv
+							<< std::endl
+							<< varS.par_section_name
+							<< u8R"(;)"sv
+							<< std::endl
+							<< varLineCout
+							<< u8R"(;)"sv
+							<< std::endl
+							<< varP
+							<< std::endl
+							<< std::endl;
+					}
 				}
 				/************************************************/
 			}
