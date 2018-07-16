@@ -10,13 +10,14 @@
 #include <filesystem>
 #include <string_view>
 
-/*不支持中文*/
+/*仅支持ASCII码*/
 inline const  QDir & $g$ProjectCurrentPath() { 
 	static const auto $m$Ans = QDir{ PRO_CURRENT_PATH };
 	return $m$Ans;
 }
 
-inline std::string replace_all(const std::string & arg) {
+/*将替换latex特殊字符*/
+inline std::string replace_all(const std::string_view arg) {
 	if (arg.empty()) { return {}; }
 
 	using namespace std::string_view_literals;
@@ -27,6 +28,7 @@ inline std::string replace_all(const std::string & arg) {
 		ReplaceItem() = default;
 		ReplaceItem(std::regex && a, std::string &&b) :regex(std::move(a)), data(std::move(b)) {}
 	};
+
 	//regex : ^ $ \ . * + ? ( ) [ ] { } |
 	const static std::vector< ReplaceItem > varReplaceDutys = []() {
 		std::vector< ReplaceItem > ans;
@@ -103,6 +105,7 @@ inline std::string replace_all(const std::string & arg) {
 	return std::move(ans);
 }
 
+/*获得章名，去掉 第……卷 */
 inline std::string get_chapter_name(const std::string & arg) {
 	if (arg.empty()) { return {}; }
 	const static std::regex varR{ u8R"(^第(一|二|三|四|五|六|七|八|九|十|零|百|千|万)+?卷(( |:|：)+)(.*))" };
@@ -114,6 +117,7 @@ inline std::string get_chapter_name(const std::string & arg) {
 	return{};
 }
 
+/*获得节名，去掉 第……节 */
 inline std::string get_section_name(const std::string & arg) {
 	if (arg.empty()) { return {}; }
 	const static std::regex varR{ u8R"(^第(一|二|三|四|五|六|七|八|九|十|零|百|千|万)+?节(( |:|：)+)(.*))" };
@@ -142,6 +146,7 @@ public:
 	std::vector< Section> par_sections;
 };
 
+/*分节*/
 inline std::vector< DetailChapter > split_sectoin(std::vector<Chapter> & arg) {
 	std::vector< DetailChapter > varAns;
 	varAns.reserve(arg.size());
@@ -175,6 +180,7 @@ inline std::vector< DetailChapter > split_sectoin(std::vector<Chapter> & arg) {
 	return std::move(varAns);
 }
 
+/*分章*/
 inline std::vector< Chapter > split_chapter(std::vector<std::string> & arg) {
 	std::vector< Chapter > varAns;
 	const static std::regex varR{ u8R"(^第(一|二|三|四|五|六|七|八|九|十|零|百|千|万)+?卷( |:|：).*)" };
@@ -204,6 +210,7 @@ inline std::vector< Chapter > split_chapter(std::vector<std::string> & arg) {
 	return std::move(varAns);
 }
 
+/*去掉原文带的广告*/
 inline void remove_ad(std::vector< DetailChapter > & arg) {
 	const static std::regex varR{ u8R"(-*)" };
 
@@ -222,11 +229,10 @@ inline void remove_ad(std::vector< DetailChapter > & arg) {
 			}
 		}
 	}
-
-
-
+	
 }
 
+/*根据guzhenren.txt生成tex文件*/
 inline void update() {
 	using namespace std::string_view_literals;
 	std::vector< DetailChapter > detail_chapters;
@@ -322,7 +328,7 @@ inline void update() {
 
 }
 
-
+/*write on : 2018/7/16*/
 int main(int argc, char *argv[]) {
 
 	QGuiApplication app(argc, argv);
