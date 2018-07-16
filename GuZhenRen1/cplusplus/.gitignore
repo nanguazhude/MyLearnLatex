@@ -4,10 +4,11 @@
 *.synctex.gz
 *.asv
 *.toc
-*.toc
 *.synctex(busy)
-*.stash
-*.filters
-*.ipch
-*.db
-*.opendb
+*.pro.user
+*.vcxproj
+/release
+/debug
+*.suo
+*.sln
+*.user
