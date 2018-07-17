@@ -246,10 +246,11 @@ inline void remove_ad(std::vector< DetailChapter > & arg) {
 	const static std::regex varR{ u8R"(-*)"
 		, std::regex_constants::ECMAScript | std::regex_constants::optimize };
 
-	/*移除文档末尾的 ------------ */
+	/*移除文档末尾和开头的 ------------ */
 	for (auto & varC : arg) {
 		for (auto & varS : varC.par_sections) {
 			auto & varD = varS.par_data;
+
 			for (;;) {
 				if (varD.empty()) { break; }
 				const auto & l = *(varD.rbegin());
@@ -259,6 +260,17 @@ inline void remove_ad(std::vector< DetailChapter > & arg) {
 				}
 				break;
 			}
+
+			for (;;) {
+				if (varD.empty()) { break; }
+				const auto & l = *(varD.begin());
+				if (std::regex_match(l, varR)) {
+					varD.erase(varD.begin());
+					continue;
+				}
+				break;
+			}
+
 		}
 	}
 
