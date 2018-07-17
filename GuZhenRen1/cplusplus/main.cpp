@@ -329,13 +329,18 @@ inline void update() {
 
 		//create : index.tex
 		std::ofstream ofs_chapter{
-			std::filesystem::u8path(varDir.absoluteFilePath(QStringLiteral("index.tex")).toUtf8().toStdString()),
+			std::filesystem::u8path(varDir.absoluteFilePath(
+				varChapterName_ +
+				QStringLiteral("_index.tex")
+			).toUtf8().toStdString()),
 			std::ios::binary
 		};
 
+		bool isIndependChapter = false;
 		if (varC.par_chapter_name.find(u8R"(第零零卷)"sv) != std::string::npos) {
-			ofs_chapter << u8R"(\backmatter)"sv << std::endl;
+			//ofs_chapter << u8R"(\backmatter)"sv << std::endl;
 			ofs_chapter << u8R"(\newchapterindepend{)"sv;
+			isIndependChapter = true;
 		}
 		else {
 			ofs_chapter << u8R"(\newchapter{)"sv;
@@ -351,7 +356,10 @@ inline void update() {
 
 		const auto varChapterName = varChapterName_.toUtf8().toStdString();
 		for (const auto & varS : varC.par_sections) {
-			const QString sectionName__ = QString("%1").arg(++n_section, 3, 10, QChar('0')) + QStringLiteral(".tex");
+			const QString sectionName__ =
+				varChapterName_ +
+				QStringLiteral("_") +
+				QString("%1").arg(++n_section, 3, 10, QChar('0')) + QStringLiteral(".tex");
 			const QString sectionPath = varDir.absoluteFilePath(sectionName__);
 			const auto setctionName = sectionName__.toUtf8().toStdString();
 			const std::filesystem::path sectionPathFile = std::filesystem::u8path(sectionPath.toUtf8().toStdString());
@@ -373,7 +381,14 @@ inline void update() {
 			\end{this_body}
 			***/
 
-			ofs_sectoin << u8R"(\newsection{)"sv
+			if (isIndependChapter) {
+				ofs_sectoin << u8R"(\newsectionindepend{)"sv;
+			}
+			else {
+				ofs_sectoin << u8R"(\newsection{)"sv;
+			}
+
+			ofs_sectoin
 				<< get_section_name(varS.par_section_name)
 				<< u8R"(})"sv
 				<< u8R"(    %)"sv
