@@ -44,11 +44,17 @@
 	}%%end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\usepackage{multicol}
+\usepackage{tocbibind}
+
 \begin{document}
 
-\maketitle%生成标题
-\tableofcontents%生成目录
  
+\maketitle%生成标题
+ 
+\include{maketableofcontents}
+ 
+
 %\titleformat{\chapter}{\centering\Huge\bfseries}{第\,\thechapter\,卷}{1em}{}
 \CTEXsetup[name={第,卷}]{chapter}
 \CTEXsetup[
@@ -59,15 +65,26 @@
 
 %正文
 \chapter{鸡鸡大}
-\section{鸡鸡小}
+
+%暂停编号，但加入目录
+\setcounter{secnumdepth}{-2}
+\section{鸡鸡不大}
+\setcounter{secnumdepth}{3}
+
 	\begin{thisBody} 
 		\textbf {sdalfjsadlkjflksadjflksadjflksadjfljl}
 
-		sdalfjsadlkjflksadjflksadjflksadjfljl
+\noindent \, \hfill \rule[0.5ex]{0.95\linewidth}{0.5pt} \hfill \,
+
+		\dag \hfill sdalfjsadlkjflksadjflksadjflksadjfljl \hfill \dag 
 
 		sfasfsafsafsdafdsafsd
 	\end{thisBody}
+
+\noindent\rule[0.5ex]{\columnwidth}{0.6pt}
 \section{鸡鸡小}
+\noindent\rule[0.5ex]{\columnwidth}{0.6pt}
+
 	\begin{thisBody} 
 		sfasfsafsafsdafdsafsd
 	\end{thisBody}
@@ -83,6 +100,12 @@
 	\begin{thisBody} 
 		sfasfsafsafsdafdsafsd
 	\end{thisBody}
+
+\section*{鸡鸡弱}
+    \begin{thisBody} 
+        sfasfsafsafsdafdsafsd
+    \end{thisBody}
+
 \section{鸡鸡小}
 	\begin{thisBody} 
 		fasfdsafsdaf 

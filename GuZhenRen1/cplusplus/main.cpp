@@ -11,15 +11,41 @@
 #include <string_view>
 #include <optional>
 
+inline const std::string_view latex_code() {
+	using namespace std::string_view_literals;
+	return u8R"(latex:)"sv;
+}
+
+inline bool is_latex_code(const std::string_view & arg) {
+	return (0 == arg.find(latex_code()));
+}
+
 /*仅支持ASCII码*/
 inline const  QDir & $g$ProjectCurrentPath() {
 	static const auto $m$Ans = QDir{ PRO_CURRENT_PATH };
 	return $m$Ans;
 }
 
+class RawStringLine : public std::string {
+	using $T$super = std::string;
+public:
+	template<typename ... Args>
+	RawStringLine(Args && ... args) :$T$super(std::forward<Args>(args)...) {}
+	RawStringLine(RawStringLine&&) = default;
+	RawStringLine(const RawStringLine&) = default;
+	RawStringLine&operator=(RawStringLine&&) = default;
+	RawStringLine&operator=(const RawStringLine&) = default;
+	bool $m$LatexCode = false;
+};
+
 /*将替换latex特殊字符*/
-inline std::string replace_all(const std::string_view arg) {
+inline RawStringLine replace_all(const std::string_view arg) {
 	if (arg.empty()) { return {}; }
+	if (is_latex_code(arg)) {
+		RawStringLine $m$Ans = arg.substr(latex_code().size());
+		$m$Ans.$m$LatexCode = true;
+		return std::move($m$Ans);
+	}
 
 	using namespace std::string_view_literals;
 	class ReplaceItem {
@@ -109,7 +135,7 @@ inline std::string replace_all(const std::string_view arg) {
 /*获得章名，去掉 第……卷 */
 inline std::string get_chapter_name(const std::string & arg) {
 	if (arg.empty()) { return {}; }
-	const static std::regex varR{ u8R"(^第(一|二|三|四|五|六|七|八|九|十|零|百|千|万)+?卷(( |:|：)+)(.*))" 
+	const static std::regex varR{ u8R"(^第(一|二|三|四|五|六|七|八|九|十|零|百|千|万)+?卷(( |:|：)+)(.*))"
 		, std::regex_constants::ECMAScript | std::regex_constants::optimize };
 	std::smatch varAns;
 	if (std::regex_match(arg, varAns, varR)) {
@@ -122,7 +148,7 @@ inline std::string get_chapter_name(const std::string & arg) {
 /*获得节名，去掉 第……节 */
 inline std::string get_section_name(const std::string & arg) {
 	if (arg.empty()) { return {}; }
-	const static std::regex varR{ u8R"(^第(一|二|三|四|五|六|七|八|九|十|零|百|千|万)+?节(( |:|：)+)(.*))" 
+	const static std::regex varR{ u8R"(^第(一|二|三|四|五|六|七|八|九|十|零|百|千|万)+?节(( |:|：)+)(.*))"
 		, std::regex_constants::ECMAScript | std::regex_constants::optimize };
 	std::smatch varAns;
 	if (std::regex_match(arg, varAns, varR)) {
@@ -187,7 +213,7 @@ inline std::vector< DetailChapter > split_sectoin(std::vector<Chapter> & arg) {
 /*分章*/
 inline std::vector< Chapter > split_chapter(std::vector<std::string> & arg) {
 	std::vector< Chapter > varAns;
-	const static std::regex varR{ u8R"(^第(一|二|三|四|五|六|七|八|九|十|零|百|千|万)+?卷( |:|：).*)" 
+	const static std::regex varR{ u8R"(^第(一|二|三|四|五|六|七|八|九|十|零|百|千|万)+?卷( |:|：).*)"
 		, std::regex_constants::ECMAScript | std::regex_constants::optimize };
 	//goto_next:
 	{
@@ -338,11 +364,17 @@ inline void update() {
 			std::uint32_t varLineCout = 0;
 			/*写每一行*/
 			for (const auto & varP : varS.par_data) {
+				const auto varLatexLine = replace_all(varP);
+				if (varLatexLine.$m$LatexCode) {/*如果这是一行latex控制行...*/
+					ofs_sectoin << varLatexLine << std::endl;
+					continue;
+				}
+				/*普通文件行...*/
 				ofs_sectoin
 					<< u8R"(%)"sv
 					<< ++varLineCout
 					<< std::endl
-					<< replace_all(varP)
+					<< varLatexLine
 					<< std::endl
 					<< std::endl;
 				/************************************************/
