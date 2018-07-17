@@ -21,6 +21,7 @@
 }
 
 \newcommand\newchapterindepend[1]{                        %定义一个新的chapter
+    \cleardoublepage                              %增加页面空白
     \setcounter{vcurrentcountersection}{0}        %将section编号重置为0
     \setcounter{section}{0}                       %将section编号重置为0
     \rhead{}                                      %删除右上页眉
@@ -31,7 +32,6 @@
     \rhead{
         \,\;\currentchaptername\,\;
     }                                             %定义右上页眉
-    \cleardoublepage                              %增加页面空白
 }
 
 \newcommand\newsection[1]{                        %定义一个新的section
@@ -40,9 +40,9 @@
     \rhead{}                                      %删除右上页眉
     \renewcommand\currentsectionname{#1}          %定义当前section名字
     \stepcounter{vcurrentcountersection}          %设置当前section计数，应当与section自动计数一致
-    \noindent \, \hfill \rule[0.5ex]{0.95\linewidth}{0.8pt} \hfill \,       %增加分割线
+    \noindent \, \hfill \rule[0.5ex]{0.95\linewidth}{1pt} \hfill \,       %增加分割线
     \section{ \currentsectionname }               %创建section
-    \noindent \, \hfill \rule[0.5ex]{0.95\linewidth}{1.2pt} \hfill \,        %增加分割线
+    \noindent \, \hfill \rule[0.5ex]{0.95\linewidth}{2pt} \hfill \,        %增加分割线
     \rhead{
         第\,\zhnumber{ \thechapter }\,卷
         \,\;\currentchaptername\,\;
@@ -55,14 +55,12 @@
     \clearpage                                    %增加页面空白
     \rhead{}                                      %删除右上页眉
     \renewcommand\currentsectionname{#1}          %定义当前section名字
-    \noindent \, \hfill \rule[0.5ex]{0.95\linewidth}{0.8pt} \hfill \,       %增加分割线
+    \noindent \, \hfill \rule[0.5ex]{0.95\linewidth}{1pt} \hfill \,       %增加分割线
     \setcounter{secnumdepth}{-2}                  %暂停编号，但加入目录
     \section{ \currentsectionname }               %创建section
     \setcounter{secnumdepth}{3}                   %恢复编号
-    \noindent \, \hfill \rule[0.5ex]{0.95\linewidth}{1.2pt} \hfill \,        %增加分割线
+    \noindent \, \hfill \rule[0.5ex]{0.95\linewidth}{2pt} \hfill \,        %增加分割线
     \rhead{
-        第\,\zhnumber{ \thechapter }\,卷
-        \,\;\currentchaptername\,\;
-        \currentsectionname 
+        \,\;\currentsectionname\,\;
     }                                             %定义右上页眉
 }
