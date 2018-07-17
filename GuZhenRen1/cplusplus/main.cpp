@@ -333,7 +333,15 @@ inline void update() {
 			std::ios::binary
 		};
 
-		ofs_chapter << u8R"(\newchapter{)"sv
+		if (varC.par_chapter_name.find(u8R"(第零零卷)"sv) != std::string::npos) {
+			ofs_chapter << u8R"(\backmatter)"sv << std::endl;
+			ofs_chapter << u8R"(\newchapterindepend{)"sv;
+		}
+		else {
+			ofs_chapter << u8R"(\newchapter{)"sv;
+		}
+
+		ofs_chapter
 			<< get_chapter_name(varC.par_chapter_name)
 			<< u8R"(})"sv
 			<< u8R"(    %)"sv
