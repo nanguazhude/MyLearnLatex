@@ -3,7 +3,17 @@
 \usepackage{xcolor}
 \usepackage{color}
 %设置页面
-\usepackage[a4paper,left=1cm,right=1cm,top=1cm,bottom=1.3cm]{geometry}
+\usepackage[
+a4paper,
+left=3cm,  %靠近装订线的边距
+right=3cm, %远离装订线的边距
+top=3cm,
+bottom=3cm,
+headheight=1.3cm,
+headsep=1cm,
+marginparsep=1cm,
+marginparwidth=1cm
+]{geometry}
 
 %设置输出pdf格式
 \usepackage[
@@ -24,6 +34,7 @@
 \usepackage{amsmath}
 \usepackage{cite}
 \usepackage{caption}
+\usepackage{fancybox}
 %\usepackage{titlesec}
 
 %页码 页眉 页脚
@@ -46,10 +57,18 @@
 
 \usepackage{multicol}
 \usepackage{tocbibind}
-\titlespacing*{\section}{0}{1ex}{1ex}
+\titlespacing*{\section}{0pt}{1ex}{1ex}
 
 \begin{document}
 
+\fancyput*(0cm,-1.04\textheight){ \setlength\fboxsep{0pt} \noindent\framebox[1.03\textwidth]{ \noindent \rule{0cm}{ 1.04\textheight } } }
+\fancyput*(1.03\textwidth,-1\textheight){ \setlength\fboxsep{0pt} \noindent\framebox[2cm]{ \noindent \rule{0cm}{ \textheight } } }
+
+%\fancypage{%
+%	\setlength{\fboxsep}{2pt}   %
+%	\setlength{\fboxrule}{1pt}%
+%	\setlength{\shadowsize}{0pt}%
+%	\shadowbox}{} 
  
 \maketitle%生成标题
  
@@ -64,8 +83,15 @@
 	format={\raggedright\bfseries}
 ]{section}
 
+\newcommand\testvvvv[1]{ \ifnum #1=1 value \fi sdfsf }
+
+
 %正文
 \chapter{鸡鸡大}
+
+\testvvvv{1}
+
+\testvvvv{0}
 
 %暂停编号，但加入目录
 \setcounter{secnumdepth}{-2}
@@ -77,7 +103,7 @@
 
 \noindent \, \hfill \rule[0.5ex]{0.95\linewidth}{0.5pt} \hfill \,
 
-		\dag \hfill sdalfjsadlkjflksadjflksadjflksadjfljl \hfill \dag 
+\noindent		\dag \hfill sdalfjsadlkjflksadjflksadjflksadjfljl \hfill \dag 
 
 		sfasfsafsafsdafdsafsd
 	\end{thisBody}
@@ -90,8 +116,80 @@
 		sfasfsafsafsdafdsafsd
 	\end{thisBody}
 \section{鸡鸡小}
-	\begin{thisBody} 
+	\begin{thisBody}
+			sfasfsafsafsdafdsafsd
+		
 		sfasfsafsafsdafdsafsd
+		
+		sfasfsafsafsdafdsafsd
+		
+		sfasfsafsafsdafdsafsd
+		
+		sfasfsafsafsdafdsafsd
+		
+		
+		sfasfsafsafsdafdsafsd
+			sfasfsafsafsdafdsafsd
+		
+		sfasfsafsafsdafdsafsd
+		
+		sfasfsafsafsdafdsafsd
+		
+		sfasfsafsafsdafdsafsd
+		
+		sfasfsafsafsdafdsafsd
+		
+		
+		sfasfsafsafsdafdsafsd
+			sfasfsafsafsdafdsafsd
+		
+		sfasfsafsafsdafdsafsd
+		
+		sfasfsafsafsdafdsafsd
+		
+		sfasfsafsafsdafdsafsd
+		
+		sfasfsafsafsdafdsafsd
+		
+		
+		sfasfsafsafsdafdsafsd
+			sfasfsafsafsdafdsafsd
+		
+		sfasfsafsafsdafdsafsd
+		
+		sfasfsafsafsdafdsafsd
+		
+		sfasfsafsafsdafdsafsd
+		
+		sfasfsafsafsdafdsafsd
+		
+		
+		sfasfsafsafsdafdsafsd
+			sfasfsafsafsdafdsafsd
+		
+		sfasfsafsafsdafdsafsd
+		
+		sfasfsafsafsdafdsafsd
+		
+		sfasfsafsafsdafdsafsd
+		
+		sfasfsafsafsdafdsafsd
+		
+		
+		sfasfsafsafsdafdsafsd
+		 
+		sfasfsafsafsdafdsafsd
+		
+			sfasfsafsafsdafdsafsd
+			
+				sfasfsafsafsdafdsafsd
+				
+					sfasfsafsafsdafdsafsd
+					
+						sfasfsafsafsdafdsafsd
+						
+						
+							sfasfsafsafsdafdsafsd
 	\end{thisBody}
 \section{鸡鸡小}
 	\begin{thisBody} 
