@@ -1,7 +1,15 @@
 \usepackage{fancyhdr}
+
+\newenvironment{setheadenvironment}{ 
+    \fangsong
+    \fontsize{16pt}{16pt}
+    \setlength{\baselineskip}{16.2pt}
+    \selectfont
+}{}
+
 %页码 页眉 页脚
 \pagestyle{fancy}               %使用fancy风格
 \fancyhf{}                      %清除所有页眉页脚
-\lhead{\thepage}                %页码居中
+\lhead{ \setheadenvironment $\thepage$ }                %页码居中
 \renewcommand\footrulewidth{0pt}%无页脚线
 \renewcommand\headrulewidth{0pt}%无页眉线

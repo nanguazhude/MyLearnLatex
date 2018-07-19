@@ -79,6 +79,8 @@ inline RawStringLine replace_all(const std::string_view arg) {
 	}();
 
 	std::string ans;
+	ans.reserve(arg.size());
+
 	class Replace {
 	public:
 		std::string_view data;

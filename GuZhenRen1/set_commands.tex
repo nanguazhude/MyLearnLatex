@@ -13,7 +13,7 @@
     \rhead{}                                      %删除右上页眉
     \renewcommand\currentchaptername{#1}          %设置当前chapter名称
     \chapter{ \currentchaptername }               %定义新的chapter
-    \rhead{
+    \rhead{ \setheadenvironment
         第\,\zhnumber{ \thechapter }\,卷
         \,\;\currentchaptername\,\;
     }                                             %定义右上页眉
@@ -29,7 +29,7 @@
     \setcounter{secnumdepth}{-2}                  %暂停编号，但加入目录
     \chapter{ \currentchaptername }               %定义新的chapter
     \setcounter{secnumdepth}{3}                   %恢复编号
-    \rhead{
+    \rhead{ \setheadenvironment
         \,\;\currentchaptername\,\;
     }                                             %定义右上页眉
 }
@@ -43,7 +43,7 @@
     \noindent $\xrfill[0.6ex]{1pt}[colortextthisproject]$            %增加分割线
     \section{ \currentsectionname }               %创建section
     \noindent $\xrfill[0.6ex]{1pt}[colortextthisproject]$              %增加分割线
-    \rhead{
+    \rhead{ \setheadenvironment
         第\,\zhnumber{ \thechapter }\,卷
         \,\;\currentchaptername\,\;
         第\,\zhnumber{\currentcountersection}\,章
@@ -60,7 +60,7 @@
     \section{ \currentsectionname }               %创建section
     \setcounter{secnumdepth}{3}                   %恢复编号
     \noindent $\xrfill[0.6ex]{1pt}[colortextthisproject]$              %增加分割线
-    \rhead{
+    \rhead{ \setheadenvironment
         \,\;\currentsectionname\,\;
     }                                             %定义右上页眉
 }
