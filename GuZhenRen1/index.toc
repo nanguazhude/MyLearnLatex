@@ -95,8 +95,8 @@
 \contentsline {section}{\numberline {第 九十二 章} 未来遥遥在望}{424}{section.1.92}
 \contentsline {section}{\numberline {第 九十三 章} 小兽潮}{429}{section.1.93}
 \contentsline {section}{\numberline {第 九十四 章} 忽然收力}{434}{section.1.94}
-\contentsline {section}{\numberline {第 九十五 章} 为了死去的人}{438}{section.1.95}
-\contentsline {section}{\numberline {第 九十六 章} 猪的队友}{444}{section.1.96}
+\contentsline {section}{\numberline {第 九十五 章} 猪的队友}{438}{section.1.95}
+\contentsline {section}{\numberline {第 九十六 章} 为了死去的人}{443}{section.1.96}
 \contentsline {section}{\numberline {第 九十七 章} 魔头横行}{449}{section.1.97}
 \contentsline {section}{\numberline {第 九十八 章} 炼蛊的艰难}{454}{section.1.98}
 \contentsline {section}{\numberline {第 九十九 章} 是人不是神}{458}{section.1.99}

@@ -426,7 +426,7 @@ inline void update() {
 			for (const auto & varP : varS.par_data) {
 				const auto varLatexLine = replace_all(varP);
 				if (varLatexLine.$m$LatexCode) {/*如果这是一行latex控制行...*/
-					ofs_sectoin << varLatexLine << std::endl;
+					ofs_sectoin << varLatexLine << std::endl << std::endl;
 					continue;
 				}
 				/*普通文件行...*/
