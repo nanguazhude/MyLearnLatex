@@ -73,7 +73,9 @@ inline RawStringLine replace_all(const std::string_view arg) {
 		ans.emplace_back(std::regex(u8R"(×)", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\texttimes{})"sv));
 		ans.emplace_back(std::regex(u8R"(♀)", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\male{})"sv));
 		ans.emplace_back(std::regex(u8R"(♂)", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\female{})"sv));
-		return std::move(ans);
+		ans.emplace_back(std::regex(u8R"(★)", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\ding{72})"sv));
+		ans.emplace_back(std::regex(u8R"(☆)", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\ding{73})"sv));
+		return std::move(ans); 
 	}();
 
 	std::string ans;
