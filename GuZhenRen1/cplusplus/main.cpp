@@ -419,8 +419,6 @@ inline void update() {
 
 			ofs_sectoin << u8R"(\begin{this_body})"sv 
 				<< std::endl
-				<< std::endl 
-				<< std::endl 
 				<< std::endl;
 
 			std::uint32_t varLineCout = 0;
