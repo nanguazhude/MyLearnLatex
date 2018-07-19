@@ -79,7 +79,6 @@ inline RawStringLine replace_all(const std::string_view arg) {
 	}();
 
 	std::string ans;
-	ans.reserve(arg.size());
 
 	class Replace {
 	public:
@@ -136,6 +135,15 @@ inline RawStringLine replace_all(const std::string_view arg) {
 
 		}/*replace*/
 	}/*regex*/
+
+	{
+		/*先计算返回元素大小...*/
+		std::size_t varFinalSize = 4;
+		for (const auto & varI : tmpReplaces) {
+			varFinalSize += varI.data.size();
+		}
+		ans.reserve(varFinalSize);
+	}
 
 	for (const auto & varI : tmpReplaces) {
 		if (varI.data.empty())continue;
@@ -408,7 +416,13 @@ inline void update() {
 				<< varS.par_section_name
 				<< std::endl
 				<< std::endl;
-			ofs_sectoin << u8R"(\begin{this_body})"sv << std::endl << std::endl;
+
+			ofs_sectoin << u8R"(\begin{this_body})"sv 
+				<< std::endl
+				<< std::endl 
+				<< std::endl 
+				<< std::endl;
+
 			std::uint32_t varLineCout = 0;
 			/*写每一行*/
 			for (const auto & varP : varS.par_data) {
