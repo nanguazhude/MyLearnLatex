@@ -42,13 +42,14 @@
     \stepcounter{vcurrentcountersection}          %设置当前section计数，应当与section自动计数一致
 %    \noindent $\xrfill[0.6ex]{1pt}[colortextthisproject]$            %增加分割线
     \section{ \currentsectionname }               %创建section
-%    \noindent $\xrfill[0.6ex]{1pt}[colortextthisproject]$              %增加分割线
+    \noindent $\xrfill[0.6ex]{0.3pt}[colortextthisproject]$              %增加分割线
     \rhead{ \setheadenvironment
         第\,\zhnumber{ \thechapter }\,卷
         \,\;\currentchaptername\,\;
         第\,\zhnumber{\currentcountersection}\,章
         \,\;\currentsectionname 
     }                                             %定义右上页眉
+    \par
 }
  
 \newcommand\newsectionindepend[1]{                        %定义一个新的section
@@ -58,9 +59,11 @@
 %    \noindent $\xrfill[0.6ex]{1pt}[colortextthisproject]$             %增加分割线
     \setcounter{secnumdepth}{-2}                  %暂停编号，但加入目录
     \section{ \currentsectionname }               %创建section
+    
     \setcounter{secnumdepth}{3}                   %恢复编号
-%    \noindent $\xrfill[0.6ex]{1pt}[colortextthisproject]$              %增加分割线
+    \noindent $\xrfill[0.6ex]{0.3pt}[colortextthisproject]$              %增加分割线
     \rhead{ \setheadenvironment
         \,\;\currentsectionname\,\;
     }                                             %定义右上页眉
+    \par
 }
