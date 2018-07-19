@@ -75,7 +75,7 @@ inline RawStringLine replace_all(const std::string_view arg) {
 		ans.emplace_back(std::regex(u8R"(♂)", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\female{})"sv));
 		ans.emplace_back(std::regex(u8R"(★)", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\ding{72})"sv));
 		ans.emplace_back(std::regex(u8R"(☆)", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\ding{73})"sv));
-		return std::move(ans); 
+		return std::move(ans);
 	}();
 
 	std::string ans;
@@ -91,7 +91,12 @@ inline RawStringLine replace_all(const std::string_view arg) {
 
 	tmpReplaces.emplace_back(arg, false);
 
-	for (const auto & R : varReplaceDutys) {
+	for (const auto & R : varReplaceDutys) {/*对于每一个正则表达式*/
+
+		/*如果输入里面没有匹配此正则表达式则跳过*/
+		if (false == std::regex_search(arg.data(), arg.data() + arg.size(), R.regex))
+			continue;
+
 		tmpReplacesInput = std::move(tmpReplaces);
 
 		for (const auto & varD : tmpReplacesInput) {
