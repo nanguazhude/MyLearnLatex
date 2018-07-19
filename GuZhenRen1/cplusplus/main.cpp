@@ -69,6 +69,10 @@ inline RawStringLine replace_all(const std::string_view arg) {
 		ans.emplace_back(std::regex(u8R"(\})", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\})"sv));
 		ans.emplace_back(std::regex(u8R"(_)", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\_)"sv));
 		ans.emplace_back(std::regex(u8R"(\\)", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\\)"sv));
+		ans.emplace_back(std::regex(u8R"(°)", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\textdegree{})"sv));
+		ans.emplace_back(std::regex(u8R"(×)", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\texttimes{})"sv));
+		ans.emplace_back(std::regex(u8R"(♀)", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\male{})"sv));
+		ans.emplace_back(std::regex(u8R"(♂)", std::regex_constants::ECMAScript | std::regex_constants::optimize), std::string(u8R"(\female{})"sv));
 		return std::move(ans);
 	}();
 

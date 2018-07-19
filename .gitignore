@@ -11,3 +11,5 @@
 *.ipch
 *.db
 *.opendb
+*.tfm
+*.600pk
