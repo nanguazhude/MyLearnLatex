@@ -2123,7 +2123,8 @@
 \contentsline {section}{\numberline {第 一百一十九 章} 成尊的四个条件}{10568}{section.6.119}
 \contentsline {section}{\numberline {第 一百二十 章} 尊者无敌之秘}{10573}{section.6.120}
 \contentsline {section}{\numberline {第 一百二十一 章} 得南疆乐土真传}{10578}{section.6.121}
-\contentsline {chapter}{ 番外}{10583}{chapter*.31}
-\contentsline {section}{ 狂蛮传1：人族奴隶}{10584}{section*.32}
-\contentsline {section}{ 狂蛮传2}{10591}{section*.33}
-\contentsline {section}{ 狂蛮传3：赚了}{10595}{section*.34}
+\contentsline {section}{\numberline {第 一百二十二 章} 梦道大师}{10583}{section.6.122}
+\contentsline {chapter}{ 番外}{10589}{chapter*.31}
+\contentsline {section}{ 狂蛮传1：人族奴隶}{10590}{section*.32}
+\contentsline {section}{ 狂蛮传2}{10597}{section*.33}
+\contentsline {section}{ 狂蛮传3：赚了}{10601}{section*.34}
