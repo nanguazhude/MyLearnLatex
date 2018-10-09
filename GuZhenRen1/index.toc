@@ -2124,7 +2124,13 @@
 \contentsline {section}{\numberline {第 一百二十 章} 尊者无敌之秘}{10573}{section.6.120}
 \contentsline {section}{\numberline {第 一百二十一 章} 得南疆乐土真传}{10578}{section.6.121}
 \contentsline {section}{\numberline {第 一百二十二 章} 梦道大师}{10583}{section.6.122}
-\contentsline {chapter}{ 番外}{10589}{chapter*.31}
-\contentsline {section}{ 狂蛮传1：人族奴隶}{10590}{section*.32}
-\contentsline {section}{ 狂蛮传2}{10597}{section*.33}
-\contentsline {section}{ 狂蛮传3：赚了}{10601}{section*.34}
+\contentsline {section}{\numberline {第 一百二十三 章} 自己来争！}{10589}{section.6.123}
+\contentsline {section}{\numberline {第 一百二十四 章} 梦求真}{10594}{section.6.124}
+\contentsline {section}{\numberline {第 一百二十五 章} 明眸亮光}{10600}{section.6.125}
+\contentsline {section}{\numberline {第 一百二十六 章} 王小二失忆}{10605}{section.6.126}
+\contentsline {section}{\numberline {第 一百二十七 章} 五人混战}{10610}{section.6.127}
+\contentsline {section}{ 单章：“蛊界”原创标志设计征稿活动！}{10615}{section*.31}
+\contentsline {chapter}{ 番外}{10617}{chapter*.32}
+\contentsline {section}{ 狂蛮传1：人族奴隶}{10618}{section*.33}
+\contentsline {section}{ 狂蛮传2}{10625}{section*.34}
+\contentsline {section}{ 狂蛮传3：赚了}{10629}{section*.35}
